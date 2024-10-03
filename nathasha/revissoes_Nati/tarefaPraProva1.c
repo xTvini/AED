@@ -4,70 +4,46 @@
 typedef struct no {
     int valor;
     struct no *prox;
-    struct no *ant;
 } Node;
 
-void inserirListaDuplamenteCircular(Node** head, Node** tail, int n) {
+void inserirCircular(Node** head, Node** tail, int n) {
     Node* novo = malloc(sizeof(Node));
     if (novo != NULL) {
         novo->valor = n;
         if (*head == NULL) {
             *head = novo;
             *tail = novo;
-            (*head)->ant = novo;
-            (*tail)->prox = novo;
+            (*tail)->prox = *head;
         } else {
             novo->prox = *head;
-            (*head)->ant = novo;
-            novo->ant = *tail;
             (*tail)->prox = novo;
-            *tail = novo;
+            *head = novo;
         }
     }
 }
 
-void removerInicioListaDuplamenteCircular(Node** head, Node** tail) {
-    if (*head != NULL) {
-        Node* aux = *head;
-        if (*head == *tail) {
-            *head = NULL;
-            *tail = NULL;
-        } else {
-            *head = aux->prox;
-            (*tail)->prox = *head;
-            (*head)->ant = *tail;
-        }
-        free(aux);
-    }
-}
-
-void removerFinalListaDuplamenteCircular(Node** head, Node** tail) {
-    if (*head != NULL) {
-        Node* aux = *tail;
-        if (*head == *tail) {
-            *head = NULL;
-            *tail = NULL;
-        } else {
-            *tail = aux->ant;
-            (*head)->ant = *tail;
-            (*tail)->prox = *head;
-        }
-        free(aux);
-    }
-}
-
-void multiplicacao(Node** head, Node** tail) {
-    if(*head==*tail){
-        printf("Tamanho da lista é insuficiente :(");
+void multiplicacao(Node* head, Node* tail) {
+    if (head == tail) {
+        printf("Tamanho da lista é insuficiente :(\n");
     } else {
-        while (*head != NULL && *tail != NULL) {
-            int cabeca = (*head)->valor;
-            int rabo = (*tail)->valor;
-            int multiplicacao = cabeca * rabo;
-            printf("%d por %d é %d\n",cabeca,rabo,multiplicacao);
-            removerInicioListaDuplamenteCircular(head, tail);
-            removerFinalListaDuplamenteCircular(head, tail);
+        Node*aux=head;
+        Node*aux2=head->prox;
+        while (1) {
+            int primeiro = aux->valor;
+            int segundo = aux->prox->valor;
+            printf("%d por %d é %d\n", primeiro, segundo, primeiro*segundo);
+            aux=aux2->prox;
+            if(aux==head){
+                break;
+            }
+            aux2=aux->prox;
+            if(aux2==head){
+                break;
+            }
         }
+         if (aux != head && aux->prox == head) {
+        printf("%d por %d é %d\n", aux->valor, aux->valor, aux->valor * aux->valor);
+    }
     }
 }
 
@@ -75,19 +51,12 @@ int main() {
     Node* head = NULL;
     Node* tail = NULL;
 
-    // Inserindo valores na lista
-    inserirListaDuplamenteCircular(&head, &tail, 1);
-    inserirListaDuplamenteCircular(&head, &tail, 2);
-    inserirListaDuplamenteCircular(&head, &tail, 3);
-    inserirListaDuplamenteCircular(&head, &tail, 4);
-    inserirListaDuplamenteCircular(&head, &tail, 5);
-    inserirListaDuplamenteCircular(&head, &tail, 6);
-    inserirListaDuplamenteCircular(&head, &tail, 7);
-    inserirListaDuplamenteCircular(&head, &tail, 8);
-    
+    for (int i = 1; i <= 9; i++) {
+        inserirCircular(&head, &tail, i);
+    }
 
     printf("Resultado das multiplicações:\n");
-    multiplicacao(&head, &tail);
+    multiplicacao(head, tail); 
 
     return 0;
 }

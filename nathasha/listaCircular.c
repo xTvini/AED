@@ -45,7 +45,7 @@ void removerFinal(no**head,no**tail){
             free(aux);
         }
         else{
-            while(aux->prox!=(*tail)->prox){
+            while(aux->prox!=*tail){
                 aux=aux->prox;
             }
             aux->prox=(*tail)->prox;
