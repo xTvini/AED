@@ -66,5 +66,5 @@ void imprimir_contrario_circular_dupla(no*head,no*tail){
     do{
         printf("%d ", tail->valor);
         *tail=*tail->ant;
-    }while(head!=tail->prox);
+    }while(tail!=head->ant);
 }

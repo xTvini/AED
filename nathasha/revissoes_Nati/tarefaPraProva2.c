@@ -35,7 +35,6 @@ void sequencia(Node* head, Node* tail) {
             cont++;
             aux1 = aux1->next;
         } while (aux1 != head);
-
         if (cont < 3) {
             printf("Tamanho da lista é insuficiente :(\n");
         } else {

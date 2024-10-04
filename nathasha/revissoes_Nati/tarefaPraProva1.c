@@ -51,12 +51,12 @@ int main() {
     Node* head = NULL;
     Node* tail = NULL;
 
-    for (int i = 1; i <= 9; i++) {
+    for (int i = 11; i >= 1; i--) {
         inserirCircular(&head, &tail, i);
     }
 
     printf("Resultado das multiplicações:\n");
     multiplicacao(head, tail); 
-
+    printf("\n");
     return 0;
 }

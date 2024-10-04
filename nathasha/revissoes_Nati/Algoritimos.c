@@ -7,7 +7,9 @@ typedef struct no{
     struct no *next;
     struct no *prev;
 }no;
-//listaduplamente
+
+//LISTA DUPLAMENTE
+
 void InserirInicioDupla(no **head, int num){
     no*novo=malloc(sizeof(no));
     if(novo!=NULL){
@@ -212,9 +214,140 @@ void inserirDuplaListaCircular(no**head,no**tail,int n){
             (*tail)->next=novo;
         } else {
             novo->next=*head;
-            (*head)->prev=novo;
             novo->prev=*tail;
+            (*head)->prev=novo;
             (*tail)->next=novo;
+            *head=novo;
         }
     }
 }
+
+void inserirFinalDuplaListaCircular(no**head,no**tail,int n){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*head)->prev=novo;
+            (*tail)->next=novo;
+        } else {
+            novo->next=*head;
+            novo->prev=*tail;
+            (*tail)->next=novo;
+            (*head)->prev=novo;
+            *tail=novo;
+
+        }
+    }
+}
+
+void inserirMeioDuplaListaCircular(no**head,no**tail,int n,int ant){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*tail)->next=novo;
+            (*head)->prev=novo;
+        }else{
+            no*aux=*head;
+            do{
+                if(aux->valor==ant){
+                    novo->prev=aux->prev;
+                    novo->next=aux;
+                    aux->prev->next=novo;
+                    aux->prev=novo;
+                    return;
+                }
+                aux=aux->next;
+            }while(aux!=*head);
+        }
+    }
+}
+
+void deletarNumeroEspecificoDuplaListaCircular(no**head,no**tail,int nDelete){
+    if(*head!=NULL){
+        no*aux=*head;
+        if(*head==*tail && (*head)->valor==nDelete){
+            free(*head);
+            *tail=NULL;
+            *head=NULL;
+            return;
+        }
+        do{
+            if(aux->valor==nDelete){
+                if(aux==*head){
+                    *head=aux->next;
+                    (*tail)->next=*head;
+                    (*head)->prev=*tail;
+                }
+                if(aux==*tail){
+                    *tail=aux->prev;
+                    (*tail)->next=*head;
+                    (*head)->prev=*tail;
+                }
+                aux->prev->next=aux->next;
+                aux->next->prev=aux->prev;
+                free(aux);
+                break;
+            } else {
+                aux=aux->next;
+            }
+        }while(aux!=*head);
+    }
+}
+
+void deletarInicioDuplaListaCircular(no**head,no**tail){
+    if(*head!=NULL){
+        if(*head==*tail){
+            free(*head);
+            *head=NULL;
+            *tail=NULL;
+        } else {
+            no*aux=*head;
+            *head=aux->next;
+            (*head)->prev=*tail;
+            (*tail)->next=*head;
+            free(aux);
+        }
+    }
+}
+
+void deletarFinalDuplaListaCircular(no**head,no**tail){
+    if(*head!=NULL){
+        if(*head==*tail){
+            free(*head);
+            *head=NULL;
+            *tail=NULL;
+        } else {
+            no*aux=*tail;
+            *tail=aux->prev;
+            (*tail)->next=*head;
+            (*head)->prev=*tail;
+            free(aux);
+        }
+    }
+}
+
+void printDuplaListaCircular(no*head,no*tail){
+    if(head!=NULL){
+        do{
+            printf("%d ", head->valor);
+            head=head->next;
+        }while(head!=tail->next);
+        printf("\n");
+    }
+}
+
+void printInvertidoDuplaListaCircular(no*head,no*tail){
+    if(head!=NULL){
+        do{
+            printf("%d",tail->valor);
+            tail=tail->prev;
+        }while(tail!=head->prev);
+    }
+}
+
+//Lista Simplesmente Circular
