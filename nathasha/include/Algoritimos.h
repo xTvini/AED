@@ -8,6 +8,8 @@
 
 #include <stdio.h> 
 
+//INICIO ASSUNTO AV1
+
 //LISTA DUPLAMENTE ENCADEADA
 
 /*1*/ void InserirInicioDupla();
@@ -56,4 +58,17 @@
 /*4*/ void deleteInicioListaSimplesCircular();
 /*5*/ void deleteFinalListaSimplesCircular();
 /*6*/ void printListaSimplesCircular();
+
+//INSERTION SORT
+
+/*1*/ void insertionSort();
+
+//BUBBLE SORT
+
+/*1*/ void bubbleSortV0();
+/*2*/ void bubbleSortV1();
+/*3*/ void bubbleSortV2();
+
+//FIM ASSUNTO AV1
+
 #endif

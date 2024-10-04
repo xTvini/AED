@@ -8,6 +8,8 @@ typedef struct no{
     struct no *prev;
 }no;
 
+//INICIO ASSUNTO AV1
+
 //LISTA DUPLAMENTE
 
 void InserirInicioDupla(no **head, int num){
@@ -488,3 +490,61 @@ void printListaSimplesCircular(no*head,no*tail){
         }while(head!=tail->next);
     }
 }
+
+//Insertion Sort
+
+void insertionSort(int *arr, int tamanho,int num){
+    for(int i=1;i<tamanho;i++){
+        int j=i;
+        while(arr[j]>arr[j-1] && j>0){
+            int aux = arr[j-1];
+            arr[j-1]=arr[j];
+            arr[j]=aux;
+            --j;
+        }
+    }
+}
+
+//Bubble Sort V0
+
+void bubbleSortV0(int *arr,int tamanho, int n){
+    for(int i=1;i<tamanho;i++){
+        for(int j=0;j<tamanho-1;j++){
+            if(arr[j]>arr[j+1]){
+                int aux=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=aux;
+            }
+        }
+    }
+}
+
+void bubbleSortV1(int *arr, int tamanho, int n){
+    for(int i=1; i<tamanho;i++){
+        for(int j=tamanho-1; j>=i; j--){
+            if(arr[j]>arr[j-1]){
+                int aux=arr[j];
+                arr[j]=arr[j-1];
+                arr[j-1]=aux;
+            }
+        }
+    }
+}
+
+void bubbleSortV2(int *arr, int tamanho, int n){
+    int troca=1, n=1;
+    while(n<=tamanho && troca==1){
+        troca = 0;
+        for(int i=0;i<tamanho-1;i++){
+            if(arr[i]>arr[i+1]){
+                int aux = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = aux;
+                troca=1;
+            }
+        }
+        ++n;
+    }
+}
+
+//FIM ASSUNTO AV1
