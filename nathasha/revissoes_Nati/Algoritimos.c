@@ -242,7 +242,7 @@ void inserirFinalDuplaListaCircular(no**head,no**tail,int n){
     }
 }
 
-void inserirMeioDuplaListaCircular(no**head,no**tail,int n,int ant){
+void inserirMeioAntesDuplaListaCircular(no**head,no**tail,int n,int dps){
     no*novo=malloc(sizeof(no));
     if(novo!=NULL){
         novo->valor=n;
@@ -254,12 +254,43 @@ void inserirMeioDuplaListaCircular(no**head,no**tail,int n,int ant){
         }else{
             no*aux=*head;
             do{
-                if(aux->valor==ant){
+                if(aux->valor==dps){
                     novo->prev=aux->prev;
                     novo->next=aux;
                     aux->prev->next=novo;
                     aux->prev=novo;
                     return;
+                }
+                aux=aux->next;
+            }while(aux!=*head);
+        }
+    }
+}
+
+void inserirMeioDepoisDuplaListaCircular(no**head,no**tail,int n, int ant){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*head)->prev=*tail;
+            (*tail)->next=*head;
+        } else {
+            no*aux=*head;
+            if((*tail)->valor==ant){
+                novo->next=*head;
+                novo->prev=*tail;
+                (*tail)->next=novo;
+                *tail=novo;
+                (*head)->prev=*tail;
+            }
+            do{
+                if(aux->valor==ant){
+                    novo->next=aux->next;
+                    novo->prev=aux;
+                    aux->next->prev=novo;
+                    aux->next=novo;
                 }
                 aux=aux->next;
             }while(aux!=*head);
@@ -291,7 +322,7 @@ void deletarNumeroEspecificoDuplaListaCircular(no**head,no**tail,int nDelete){
                 aux->prev->next=aux->next;
                 aux->next->prev=aux->prev;
                 free(aux);
-                break;
+                return;
             } else {
                 aux=aux->next;
             }
@@ -351,3 +382,49 @@ void printInvertidoDuplaListaCircular(no*head,no*tail){
 }
 
 //Lista Simplesmente Circular
+
+
+void inserirInicioListaSimplesCircular(no**head,no**tail,int n){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*tail)->next=*head;
+        } else {
+            novo->next=*head;
+            *head=novo;
+            (*tail)->next=*head;
+        }
+    }
+}
+
+void inserirMeioListaSimplesCircular(no**head,no**tail,int n, int pos){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*tail)->next=*head;
+        } else {
+            no*aux=*head;
+            if((*head)->valor==pos){
+                novo->next=*head;
+                *head=novo;
+                (*tail)->next=*head;
+                return;
+            }
+            do{
+                if(aux->next->valor==pos){
+                    novo->next=aux->next;
+                    aux->next=novo;
+                    return;
+                }
+                aux=aux->next;
+            }while(aux!=*head);
+        }
+    }
+}
+

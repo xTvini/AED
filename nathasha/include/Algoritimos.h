@@ -40,14 +40,17 @@
 
 /*1*/ void inserirDuplaListaCircular();
 /*2*/ void inserirFinalDuplaListaCircular();
-/*3*/ void inserirMeioDuplaListaCircular();
-/*4*/ void deletarNumeroEspecificoDuplaListaCircular();
-/*5*/ void deletarInicioDuplaListaCircular();
-/*6*/ void deletarFinalDuplaListaCircular();
-/*7*/ void printDuplaListaCircular();
-/*8*/ void printInvertidoDuplaListaCircular();
+/*3*/ void inserirMeioAntesDuplaListaCircular();
+/*4*/ void inserirMeioDepoisDuplaListaCircular();
+/*5*/ void deletarNumeroEspecificoDuplaListaCircular();
+/*6*/ void deletarInicioDuplaListaCircular();
+/*7*/ void deletarFinalDuplaListaCircular();
+/*8*/ void printDuplaListaCircular();
+/*9*/ void printInvertidoDuplaListaCircular();
 
 //LISTA SIMPLESMENTE CIRCULAR
 
+/*1*/ void inserirInicioListaSimplesCircular();
+/*2*/ void inserirMeioListaSimplesCircular();
 
 #endif
