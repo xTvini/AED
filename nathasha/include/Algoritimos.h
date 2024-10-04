@@ -52,5 +52,8 @@
 
 /*1*/ void inserirInicioListaSimplesCircular();
 /*2*/ void inserirMeioListaSimplesCircular();
-
+/*3*/ void inserirFinalListaSimplesCircular();
+/*4*/ void deleteInicioListaSimplesCircular();
+/*5*/ void deleteFinalListaSimplesCircular();
+/*6*/ void printListaSimplesCircular();
 #endif

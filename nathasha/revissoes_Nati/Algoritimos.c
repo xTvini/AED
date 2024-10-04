@@ -428,3 +428,63 @@ void inserirMeioListaSimplesCircular(no**head,no**tail,int n, int pos){
     }
 }
 
+void inserirFinalListaSimplesCircular(no**head,no**tail,int n){
+    no*novo=malloc(sizeof(no));
+    if(novo!=NULL){
+        novo->valor=n;
+        if(*head==NULL){
+            *head=novo;
+            *tail=novo;
+            (*tail)->next=*head;
+        } else {
+            novo->next=*head;
+            (*tail)->next=novo;
+            *tail=novo;
+        }
+    }
+}
+
+void deleteInicioListaSimplesCircular(no**head,no**tail){
+    if(*head!=NULL){
+        if(*head==*tail){
+            free(*head);
+            *head=NULL;
+            *tail=NULL;
+        } else {
+            no*aux=*head;
+            *head=aux->next;
+            (*tail)->next=*head;
+            free(aux);
+        }
+    }
+}
+
+void deleteFinalListaSimplesCircular(no**head,no**tail){
+    if(*head!=NULL){
+        if(*head==*tail){
+            free(*head);
+            *head=NULL;
+            *tail=NULL;
+        } else {
+            no*aux=*head;
+            do{
+                if(aux->next==*tail){
+                    free(*tail);
+                    *tail=aux;
+                    (*tail)->next=*head;
+                    return;
+                }
+                aux=aux->next;
+            }while(aux!=*head);
+        }
+    }
+}
+
+void printListaSimplesCircular(no*head,no*tail){
+    if(head!=NULL){
+        do{
+            printf("%d ", head->valor);
+            head=head->next;
+        }while(head!=tail->next);
+    }
+}
