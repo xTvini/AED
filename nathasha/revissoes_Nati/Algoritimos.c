@@ -548,3 +548,33 @@ void bubbleSortV2(int *arr, int tamanho, int n){
 }
 
 //FIM ASSUNTO AV1
+
+//ARVORE BINARIA
+typedef struct arvore{
+    int valor;
+    struct arvore *direita;
+    struct arvore *esquerda;
+}arvore;
+
+void inserirNaARaizBinario(arvore**raiz,int chave){
+    if(*raiz==NULL){
+        *raiz=(arvore*)malloc(sizeof(arvore));
+        (*raiz)->esquerda=NULL;
+        (*raiz)->direita=NULL;
+        (*raiz)->valor=chave;
+    } else {
+        if(chave<(*raiz)->valor){
+            inserirNaARaizBinario(&(*raiz)->esquerda, chave);
+        }else if(chave>(*raiz)->valor){
+            inserirNaARaizBinario(&(*raiz)->direita, chave);
+        }
+    }
+}
+
+void printArvore(arvore*raiz){
+    if(raiz!=NULL){
+        printArvore(raiz->esquerda);
+        printArvore(raiz->direita);
+        printf("%d", raiz->valor);
+    }
+}
