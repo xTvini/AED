@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node {
+typedef struct no {
     char nome[31];
     int ficha;
-    struct Node *next;
-    struct Node *prev;
-} Node;
+    struct no *next;
+    struct no *prev;
+} no;
 
-void inserirFinal(Node **head, Node **tail, char *nome, int ficha) {
-    Node *novo = (Node *)malloc(sizeof(Node));
+void inserirFinal(no **head, no **tail, char *nome, int ficha) {
+    no *novo = (no *)malloc(sizeof(no));
     if (novo != NULL) {
         strcpy(novo->nome, nome);
         novo->ficha = ficha;
@@ -30,48 +30,41 @@ void inserirFinal(Node **head, Node **tail, char *nome, int ficha) {
     }
 }
 
-void deletar(Node **head, Node **tail, Node *node) {
+void deletar(no **head, no **tail, no *nDelete) {
     if (*head != NULL) {
-        if (node == *head && node == *tail) {
+        if (nDelete == *head && nDelete == *tail) {
             *head = NULL;
             *tail = NULL;
         } else {
-            node->prev->next = node->next;
-            node->next->prev = node->prev;
-            if (node == *head) {
-                *head = node->next;
+            nDelete->prev->next = nDelete->next;
+            nDelete->next->prev = nDelete->prev;
+            if (nDelete == *head) {
+                *head = nDelete->next;
             }
-            if (node == *tail) {
-                *tail = node->prev;
+            if (nDelete == *tail) {
+                *tail = nDelete->prev;
             }
         }
-        free(node);
+        free(nDelete);
     }
 }
 
-char* acharVencedor(Node **head, Node **tail, int tamanhoDaFila) {
-    Node *atual = *head;
+char* acharVencedor(no **head, no **tail, int tamanhoDaFila) {
+    no *atual = *head;
     int N = tamanhoDaFila;
-
     while (N > 1) {
         int valor = atual->ficha;
-        Node *proximoExcluir = atual;
-
-        // Move o ponteiro para a esquerda ou para a direita
-        if (valor % 2) {
-            for (int j = 0; j < valor; ++j) {
-                proximoExcluir = proximoExcluir->prev;
-            }
-        } else {
-            for (int j = 0; j < valor; ++j) {
+        no *proximoExcluir = atual;
+        if (valor % 2 == 0) {
+            for (int j = 0; j < valor; j++) {
                 proximoExcluir = proximoExcluir->next;
             }
-        }
-
-        // Atualiza o atual para o próximo que vai sobreviver
-        atual = (valor % 2) ? proximoExcluir->next : proximoExcluir->prev;
-
-        // Remove o nó excluído
+        } else {
+            for (int j = 0; j < valor; j++) {
+                proximoExcluir = proximoExcluir->prev;
+            }
+        }t
+        atual = (valor % 2 == 0) ? proximoExcluir->prev : proximoExcluir->next;
         deletar(head, tail, proximoExcluir);
         N--;
     }
@@ -79,27 +72,22 @@ char* acharVencedor(Node **head, Node **tail, int tamanhoDaFila) {
 }
 
 int main() {
-    Node *head = NULL;
-    Node *tail = NULL;
+    no *head = NULL;
+    no *tail = NULL;
     int tamanhoDaFila;
     char nome[31];
     int ficha;
-
     while (1) {
         scanf("%d", &tamanhoDaFila);
         if (tamanhoDaFila == 0) break;
-
-        head = NULL; // Reinicializa a lista
+        head = NULL;
         tail = NULL;
-
         for (int i = 0; i < tamanhoDaFila; i++) {
             scanf("%s %d", nome, &ficha);
             inserirFinal(&head, &tail, nome, ficha);
         }
-
         char *vencedor = acharVencedor(&head, &tail, tamanhoDaFila);
         printf("Vencedor(a): %s\n", vencedor);
     }
-    
     return 0;
 }
