@@ -71,4 +71,11 @@
 
 //FIM ASSUNTO AV1
 
+//ARVORE BINARIA
+
+/*1*/ void inserirNaARaizBinario();
+/*2*/ void posOrdem();
+/*3*/ void inOrdem();
+/*4*/ void preOrdem();
+/*5*/ void buscarArvoreBinaria();
 #endif

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "algoritimos.h"
+#include "Algoritimos.h"
 
 typedef struct no{
     int valor;
@@ -571,10 +571,33 @@ void inserirNaARaizBinario(arvore**raiz,int chave){
     }
 }
 
-void printArvore(arvore*raiz){
+void posOrdem(arvore*raiz){
     if(raiz!=NULL){
-        printArvore(raiz->esquerda);
-        printArvore(raiz->direita);
+        posOrdem(raiz->esquerda);
+        posOrdem(raiz->direita);
         printf("%d", raiz->valor);
     }
+}
+
+void inOrdem(arvore*raiz){
+    if(raiz!=NULL){
+        inOrdem(raiz->esquerda);
+        printf("%d", raiz->valor);
+        inOrdem(raiz->direita);
+    }
+}
+
+void preOrdem(arvore*raiz){
+    if(raiz!=NULL){
+        printf("%d", raiz->valor);
+        preOrdem(raiz->esquerda);
+        preOrdem(raiz->direita);
+    }
+}
+
+void buscarArvoreBinaria(arvore*raiz, int chave){
+    if(raiz->valor==chave) return 1;
+    else if(raiz == NULL) return 0;
+    else if(raiz->chave<chave) busca(raiz->direita, chave);
+    else busca(raiz->esquerda, chave);
 }

@@ -24,11 +24,21 @@ void inserirArvoreBinaria(arvore**raiz,int num){
 
 void posordemAdaptadoPraVc(arvore*raiz, int *maiorNumero){
     if(raiz!=NULL){
-        posordem(raiz->esquerda, maiorNumero);
-        posordem(raiz->direita, maiorNumero);
+        posordemAdaptadoPraVc(raiz->esquerda, maiorNumero);
+        posordemAdaptadoPraVc(raiz->direita, maiorNumero);
         if(raiz->valor>*maiorNumero){
             *maiorNumero=raiz->valor;
         }
+    }
+}
+
+int alturaArvore(arvore *raiz){
+    if(raiz==NULL) return -1;
+    else{
+        int alturaEsquerda = alturaArvore(raiz->esquerda);
+        int alturaDireita = alturaArvore(raiz->direita);
+        if(alturaEsquerda>alturaDireita) return alturaEsquerda +1;
+        else return alturaDireita +1;
     }
 }
 
