@@ -1,0 +1,19 @@
+09 - Explique o que são as colisões em uma Hash Table, aponte as
+principais consequências dessas colisões e descreva os principais métodos
+utilizados para solucioná-las. Para cada método, descreva seu
+funcionamento e as vantagens e desvantagens de sua aplicação.?
+
+colisões na Hash table ocorre quando duas chaves armazenam o mesmo indice.
+a princiapl consequencia dessas colisões são ineficiencia no uso da memoria,
+um pior desempenho da estrutura, agrupamento e perda de dados. as principais
+soluções para as colisões são separar o encadeamento, basicamente ligar a tabela
+a uma outra estrutura de dados sendo as chaves os indices dessas estruturas, uma 
+vantagem é q é facil de fazer porém um desvantagem é q consome mais memoria
+outra sulção é o Abertura do endereçamento que funciona diferentemente do encadeamento
+os elementos que colidem vão ser armazenados em outras posições que estão livres na
+tabel podendo ser linear, que vai ser o proximo espaço disponivel, quadratico, que usa 
+uma função quadratica para escolher qual vai ser a proxima posição e também o hashing duplo
+o qual forma outra hash para poder definir o proximo indice a vantagem dessa solução é que
+não usa uma nova listas, e uma desvantagem é q pode causar aglomeração. outra solução que
+eu ja mencionei antes é o proprio hashing duplo que crie outro hash para armazenar
+as colisões a vantagem é q reduz a aglomeração e a desvantagem é q é muito complexo de implementar

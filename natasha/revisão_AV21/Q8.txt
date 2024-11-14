@@ -1,0 +1,28 @@
+
+08 - Identifique e assinale a alternativa que faz uma afirmação correta sobre
+HASH TABLES, além disso, aponte e justifique o(s) erro(s) das outras
+alternativas e faça as correções necessárias para torná-las verdadeiras.
+
+a) Colisões em uma Hash Table podem ser evitadas garantindo-se que o
+número de elementos seja menor que o número de posições na tabela.
+
+A letra A está errada pois ela pode ser somente minimizada não completamnete evitada
+
+b) A função de hash é responsável por distribuir as chaves uniformemente na
+Hash Table, ajudando a minimizar colisões. -> alternativa Correta
+
+c) Em uma Hash Table, se duas chaves diferentes produzem o mesmo valor
+de hash, uma delas deve ser descartada.
+
+não deve ser descartada e sim deve ser mandada pra outro lugar pra ser armazenada tipo encadeamento separado
+
+d) As operações de busca em uma Hash Table sempre ocorrem em tempo
+constante O(1), independentemente do número de colisões.
+
+esse tempo pode aumentar com uma tabela maior ou com colisões com frequencia
+
+e) Para armazenar grandes volumes de dados, Hash Tables são preferíveis a
+árvores balanceadas porque sempre utilizam menos memória.
+
+na verdade so é melhor quando a velocidade é mais importante que como se usa a memoria
+pois a hash pode exigir mais memoria dependendo se sua implementação

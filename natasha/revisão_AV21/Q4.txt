@@ -1,0 +1,83 @@
+04 - Considere uma árvore AVL vazia. Insira os seguintes valores na árvore,
+um a um, aplicando as rotações necessárias para manter a propriedade AVL
+após cada inserção: 50, 25, 75, 10, 30, 60, 80, 65, 70, 90. Desenhe a árvore
+final resultante após todas as inserções e rotações. Por fim, indique o
+percurso pós-ordem.
+
+50 fb = 0
+
+  50
+ /      fb = 1 
+25
+
+  50
+ /  \   fb = 0   
+25   75
+
+      50
+     /  \      
+   25   75 fb = 1
+  /
+10
+
+      50   
+     /  \
+   25   75 fb = 0
+  /  \
+10    30
+
+       50   
+      /   \
+    25     75 fb = 1
+   /  \   /
+  10  30 60
+
+       50   
+      /   \
+    25     75    fb = 0
+   /  \   /  \
+  10  30 60   80
+
+       50   
+      /   \
+    25     75    fb = 0
+   /  \   /  \
+  10  30 60   80
+           \
+            65
+
+       50   
+      /   \
+    25     75    fb = 0
+   /  \   /  \
+  10  30 60   80
+           \
+            65
+
+       50   
+      /   \
+    25     75    fb = -2
+   /  \   /  \
+  10  30 60   80
+           \
+            65
+              \
+               70
+
+       50   
+      /   \
+    25     75    fb = 0
+   /  \   /  \
+  10  30 65   80
+        /  \
+      60    70
+
+       50   
+      /   \
+    25     75    fb = 0
+   /  \   /  \
+  10  30 65   80
+        /  \    \
+      60    70   90
+
+pósOrdem = 10 30 25 60 70 65 90 80 50

@@ -3,6 +3,7 @@
  * Created on May, 10th 2024
  * Author: Vinicius Diniz 
 */
+
 #ifndef ALGORITIMOS_H
 #define ALGORITIMOS_H
 
@@ -78,4 +79,16 @@
 /*3*/ void inOrdem();
 /*4*/ void preOrdem();
 /*5*/ void buscarArvoreBinaria();
+
+//ARVORE AVL
+
+/*1*/ int filhosAlt();
+/*2*/ void roda_dir();
+/*3*/ void roda_esq();
+/*4*/ void balanco();
+/*5*/ int filhosAlt();
+/*6*/ void inserirAVL();
+/*7*/ Arv *Maiordir();
+/*8*/ void removerAVL();
+
 #endif

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Algoritimos.h"
+#include "./Algoritimos.h"
 
 typedef struct no{
     int valor;
@@ -549,55 +549,188 @@ void bubbleSortV2(int *arr, int tamanho, int n){
 
 //FIM ASSUNTO AV1
 
-//ARVORE BINARIA
-typedef struct arvore{
+//Arv BINARIA
+typedef struct Arv{
     int valor;
-    struct arvore *direita;
-    struct arvore *esquerda;
-}arvore;
+    struct Arv *dir;
+    struct Arv *esq;
+}Arv;
 
-void inserirNaARaizBinario(arvore**raiz,int chave){
+void inserirNaARaizBinario(Arv**raiz,int chave){
     if(*raiz==NULL){
-        *raiz=(arvore*)malloc(sizeof(arvore));
-        (*raiz)->esquerda=NULL;
-        (*raiz)->direita=NULL;
+        *raiz=(Arv*)malloc(sizeof(Arv));
+        (*raiz)->esq=NULL;
+        (*raiz)->dir=NULL;
         (*raiz)->valor=chave;
     } else {
         if(chave<(*raiz)->valor){
-            inserirNaARaizBinario(&(*raiz)->esquerda, chave);
+            inserirNaARaizBinario(&(*raiz)->esq, chave);
         }else if(chave>(*raiz)->valor){
-            inserirNaARaizBinario(&(*raiz)->direita, chave);
+            inserirNaARaizBinario(&(*raiz)->dir, chave);
         }
     }
 }
 
-void posOrdem(arvore*raiz){
+void posOrdem(Arv*raiz){
     if(raiz!=NULL){
-        posOrdem(raiz->esquerda);
-        posOrdem(raiz->direita);
+        posOrdem(raiz->esq);
+        posOrdem(raiz->dir);
         printf("%d", raiz->valor);
     }
 }
 
-void inOrdem(arvore*raiz){
+void inOrdem(Arv*raiz){
     if(raiz!=NULL){
-        inOrdem(raiz->esquerda);
+        inOrdem(raiz->esq);
         printf("%d", raiz->valor);
-        inOrdem(raiz->direita);
+        inOrdem(raiz->dir);
     }
 }
 
-void preOrdem(arvore*raiz){
+void preOrdem(Arv*raiz){
     if(raiz!=NULL){
         printf("%d", raiz->valor);
-        preOrdem(raiz->esquerda);
-        preOrdem(raiz->direita);
+        preOrdem(raiz->esq);
+        preOrdem(raiz->dir);
     }
 }
 
-void buscarArvoreBinaria(arvore*raiz, int chave){
+void buscarArvBinaria(Arv*raiz, int chave){
     if(raiz->valor==chave) return 1;
     else if(raiz == NULL) return 0;
-    else if(raiz->chave<chave) busca(raiz->direita, chave);
-    else busca(raiz->esquerda, chave);
+    else if(raiz->valor<chave) busca(raiz->dir, chave);
+    else busca(raiz->esq, chave);
+}
+
+//ARV AVL
+
+// Calcula a altura de uma árvore/subárvore
+int filhosAlt(Arv *r) {
+  if (r == NULL)
+    return 0;
+  else {
+    int ae = filhosAlt(r->esq);  // Calcula a altura da subárvore esq
+    int ad = filhosAlt(r->dir);  // Calcula a altura da subárvore dir
+    return 1 + (ae > ad ? ae : ad);  // Retorna a altura máxima entre as subárvores + 1
+  }
+}
+
+// Realiza uma rotação simples à dir em um nó desbalanceado
+void roda_dir(Arv **p) {
+  Arv *aux = (*p)->esq;  // Nó esquerdo da raiz se torna a nova raiz
+  (*p)->esq = aux->dir;  // Subárvore dir do nó esquerdo passa para a esq do nó atual
+  aux->dir = (*p);       // Nó atual se torna filho direito do nó esquerdo
+  *p = aux;              // Atualiza o ponteiro para o novo nó raiz
+}
+
+// Realiza uma rotação simples à esq em um nó desbalanceado
+void roda_esq(Arv **p) {
+  Arv *aux = (*p)->dir;  // Nó direito da raiz se torna a nova raiz
+  (*p)->dir = aux->esq;  // Subárvore esq do nó direito passa para a dir do nó atual
+  aux->esq = (*p);       // Nó atual se torna filho esquerdo do nó direito
+  *p = aux;              // Atualiza o ponteiro para o novo nó raiz
+}
+
+// Realiza o balanceamento do nó, aplicando rotações conforme necessário
+void balanco(Arv **p) {
+  if (*p != NULL) {
+    int fb = filhosAlt((*p)->dir) - filhosAlt((*p)->esq);  // Calcula o fator de balanceamento
+
+    // Desbalanceamento para a esq
+    if (fb <= -2) {
+      int fb_aux = filhosAlt((*p)->esq->dir) - filhosAlt((*p)->esq->esq);
+      if (fb_aux > 0) {  // Rotação dupla dir
+        roda_esq(&((*p)->esq));
+        roda_dir(p);
+        printf("\nRotação: Dupla dir");
+      } else {  // Rotação simples dir
+        roda_dir(p);
+        printf("\nRotação: dir Simples");
+      }
+    }
+    // Desbalanceamento para a dir
+    else if (fb >= 2) {
+      int fb_aux = filhosAlt((*p)->dir->dir) - filhosAlt((*p)->dir->esq);
+      if (fb_aux < 0) {  // Rotação dupla esq
+        roda_dir(&((*p)->dir));
+        roda_esq(p);
+        printf("\nRotação: Dupla esq");
+      } else {  // Rotação simples esq
+        roda_esq(p);
+        printf("\nRotação: esq Simples");
+      }
+    }
+  }
+}
+
+// Insere um novo nó na árvore e balanceia após a inserção
+void inserirAVL(Arv **t, int n) {
+  if (*t == NULL) {  // Cria um novo nó se a posição estiver vazia
+    *t = (Arv *)malloc(sizeof(Arv));
+    (*t)->esq = NULL;
+    (*t)->dir = NULL;
+    (*t)->valor = n;
+  } else if (n < (*t)->valor)
+    inserirAVL(&(*t)->esq, n);  // Insere na subárvore esq
+  else if (n > (*t)->valor)
+    inserirAVL(&(*t)->dir, n);  // Insere na subárvore dir
+  balanco(t);  // Realiza o balanceamento após a inserção
+}
+
+// Encontra o maior valor na subárvore esq para substituição
+Arv *Maiordir(Arv **no) {
+  if ((*no)->dir != NULL)
+    return Maiordir(&(*no)->dir);  // Procura o maior valor (extremidade dir)
+  else {
+    Arv *aux = *no;
+    if ((*no)->esq != NULL) {
+      *no = (*no)->esq;  // Se houver uma subárvore esq, atualiza o nó
+    } else {
+      *no = NULL;  // Remove o nó se não tiver filhos
+    }
+    return aux;  // Retorna o nó com o maior valor
+  }
+}
+
+// Remove um nó da árvore e realiza balanceamento após a remoção
+void removerAVL(Arv **pRaiz, int numero) {
+  if (*pRaiz == NULL) {
+    printf("\nRemoção: Numero nao existe na Arv!");
+    return;
+  }
+  else if (numero < (*pRaiz)->valor)
+    removerAVL(&(*pRaiz)->esq, numero);  // Procura o valor na subárvore esq
+  else if (numero > (*pRaiz)->valor)
+    removerAVL(&(*pRaiz)->dir, numero);  // Procura o valor na subárvore dir
+  else {
+    Arv *pAux = *pRaiz;
+
+    // Caso 1: nó sem filhos
+    if (((*pRaiz)->esq == NULL) && ((*pRaiz)->dir == NULL)) {
+      free(pAux);
+      (*pRaiz) = NULL;
+    } 
+    // Caso 2: nó com apenas um filho (direito)
+    else if ((*pRaiz)->esq == NULL) {
+      (*pRaiz) = (*pRaiz)->dir;
+      pAux->dir = NULL;
+      free(pAux);
+    } 
+    // Caso 2: nó com apenas um filho (esquerdo)
+    else if ((*pRaiz)->dir == NULL) {
+      (*pRaiz) = (*pRaiz)->esq;
+      pAux->esq = NULL;
+      free(pAux);
+    } 
+    // Caso 3: nó com dois filhos
+    else {
+      pAux = Maiordir(&(*pRaiz)->esq);  // Encontra o maior da subárvore esq
+      pAux->esq = (*pRaiz)->esq;
+      pAux->dir = (*pRaiz)->dir;
+      (*pRaiz)->esq = (*pRaiz)->dir = NULL;
+      free((*pRaiz));
+      *pRaiz = pAux;
+    }
+  }
+  balanco(pRaiz);  // Realiza o balanceamento após a remoção
 }

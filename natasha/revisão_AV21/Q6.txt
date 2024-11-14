@@ -1,0 +1,76 @@
+
+05 - Explique como a escolha do pivô pode afetar o desempenho do
+algoritmo QuickSort. Descreva as técnicas comuns de escolha do pivô e
+
+como elas impactam o tempo de execução, incluindo cenários de melhor,
+pior e caso médio.
+Dica: Considere as seguintes abordagens para a escolha do pivô: escolha do
+primeiro elemento, escolha aleatória e mediana de três elementos.
+
+inicio              pivot
+⬇                     ⬇ 
+93,17,45,23,84,75,12,33.
+
+17,93,45,23,84,75,12,33. troca 17,93
+
+17,23,45,93,84,75,12,33. troca 23,93
+
+17,23,12,93,84,75,45,33. troca 12,45
+
+17,23,12,33,84,75,45,93. troca 33,93
+
+n<pivot divisão n>pivot
+17,23,12 |33| 84,75,45,93.
+
+inicio pivot
+⬇      ⬇ 
+17,23,12
+
+17,23,12 troca 12,17
+
+divisão n>pivot
+|12| 23,17
+
+i   p
+⬇   ⬇
+23,17 
+
+23,17 troca 17,23
+
+divisão
+|17| |23|
+
+|12| |17| |23| |33| 84,75,45,93.
+
+
+inicio  pivot
+⬇        ⬇ 
+84,75,45,93.
+
+84,75,45,93. não há nenhuma troca 
+
+divisão
+84,75,45 |93|
+
+i      p
+⬇      ⬇
+84,75,45
+
+45,75,84 troca 45,84
+
+divisão
+|45| 75,84
+
+i  p
+⬇  ⬇
+75,84
+
+75,84 troca 75,84
+
+divisão 
+|75| |84|
+
+|12| |17| |23| |33| |45| |75| |84| |93|
+
+junção
+12,17,23,33,45,75,84,93

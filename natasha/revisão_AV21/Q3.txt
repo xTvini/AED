@@ -1,0 +1,32 @@
+
+03 - Explique o que é uma árvore AVL e como ela se mantém balanceada.
+Descreva os tipos de rotações que podem ser aplicados em uma árvore AVL
+para manter o balanceamento. Em que situações cada tipo de rotação é
+necessário?
+
+Tipo 1 - rotação esquerda simples
+    Esse tipo de rotação ocorre quando a arvore
+    está desbalanceada pra direita. Fazendo assim
+    uma troca de posição girando a arvore procurando
+    fazer assim seu balanceamento. isso occorre se 
+    o fator balanceamento foi maior que 1
+Tipo 2 - rotação direita simples
+    Esse tipo de rotação ocorre quando a arvore
+    está desbalanceada pra esquerda. Fazendo assim
+    uma troca de posição girando a arvore procurando
+    fazer assim seu balanceamento. isso occorre se 
+    o fator balanceamento foi menor que -1
+Tipo 3 - rotação esquerda dupla
+    Esse tipo de balanceamento ocorre quando um nó
+    do filho da arvore ta desbalanceado pra direita
+    fazendo assim ocorrer o balanceamento duplo pois
+    ele vai precisar fazer duas rotações simples para
+    balancear a arvore, isso vai orcorrer quando o 
+    fator balanceamento for maior que 2
+Tipo 4 - rotação direita dupla
+    Esse tipo de balanceamento ocorre quando um nó
+    do filho da arvore ta desbalanceado pra esquerda
+    fazendo assim ocorrer o balanceamento duplo pois
+    ele vai precisar fazer duas rotações simples para
+    balancear a arvore, isso vai orcorrer quando o 
+    fator balanceamento for menor q -2

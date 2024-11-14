@@ -1,0 +1,32 @@
+
+05 - Explique como a escolha do pivô pode afetar o desempenho do
+algoritmo QuickSort. Descreva as técnicas comuns de escolha do pivô e
+
+como elas impactam o tempo de execução, incluindo cenários de melhor,
+pior e caso médio.
+Dica: Considere as seguintes abordagens para a escolha do pivô: escolha do
+primeiro elemento, escolha aleatória e mediana de três elementos.
+
+tipos de pivot
+
+primeiro elemento - 
+
+    esse tipo de pivot facil de implementar
+    porém caso os numeros tiverem meio organizados
+    vai demorar mais pra organizar pois como 
+    não vão haver muitas divisões e separação de
+    maiores e menores que o pivot fazendo assim
+    demorar mais pra ordenar
+
+escolha aleatoria -
+
+    como ele é aleatorio não tem como garantir
+    qual numero vai ser o pivot podendo ser ou não
+    ser uma boa divisão
+
+mediana de tres pontos -
+
+    a vantagem desse tipo é que ele evita o
+    pior caso mais eficientemente porém ele
+    exige um codigo maior pra comparar assim
+    os numeros para obter o pivot
